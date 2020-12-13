@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+  <FM.World>Мир</FM.World>
+  <FM.Faction>Фракция</FM.Faction>
+  <FM.Colonies>Колонии</FM.Colonies>
+  <FM.Loaded>Загруженные</FM.Loaded>
+  <FM.Load>Загрузить</FM.Load>
+  <FM.Unload>Выгрузить</FM.Unload>
+  <FM.actionConfirm>Вы уверены, что хотите </FM.actionConfirm>
+  
+  <FM.prepareGame>Подготовка текущей игры</FM.prepareGame>
+  <FM.prepareLoad>Подготовка к загрузке</FM.prepareLoad>
+  <FM.mapLoaded>Карта загружена успешно</FM.mapLoaded>
+  <FM.mapUnloaded>Карта выгружена успешно</FM.mapUnloaded>
+  <FM.mapUnloadFailed>Не удалось выгрузить карту</FM.mapUnloadFailed>
+  <FM.errorMapUnloadLast>Не удается выгрузить последнюю карту</FM.errorMapUnloadLast>
+  
+</LanguageData>

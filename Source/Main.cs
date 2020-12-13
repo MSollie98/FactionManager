@@ -1,4 +1,4 @@
-﻿using Harmony;
+﻿using HarmonyLib;
 using System.Reflection;
 using Verse;
 
@@ -9,13 +9,13 @@ namespace FactionManager
     {
         static Main()
         {
-            var harmony = HarmonyInstance.Create("TGPAcher.Rimworld.FactionManager");
+            var harmony = new Harmony("TGPAcher.Rimworld.FactionManager");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
 
-            if (InfinityStorageSupport.InfinityStorageActive())
+            if (ModSupport.InfinityStorageSupport.InfinityStorageActive())
             {
                 harmony.Patch(AccessTools.Method(AccessTools.TypeByName("InfiniteStorage.BuildingUtil"), "FindThingsOfTypeNextTo"),
-                    new HarmonyMethod(typeof(InfinityStorageSupport), nameof(InfinityStorageSupport.FindThingsOfTypeNextTo_Prefix)));
+                    new HarmonyMethod(typeof(ModSupport.InfinityStorageSupport), nameof(ModSupport.InfinityStorageSupport.FindThingsOfTypeNextTo_Prefix)));
             }
         }
     }

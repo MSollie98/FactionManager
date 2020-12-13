@@ -82,6 +82,16 @@ namespace FactionManager
 
             XmlNode copiedNode = xmlDocument.ImportNode(mapXmlDocument.SelectSingleNode("/mapsave/li"), true);
             xmlDocument.DocumentElement["game"]["maps"].AppendChild(copiedNode);
+
+            ModSupport.PrepareSaveGame.FixComponentDictionary(xmlDocument, mapXmlDocument, "WorkTab.FavouriteManager", "FavouriteAssignments", "workTabFavLi");
+            ModSupport.PrepareSaveGame.FixComponentDictionary(xmlDocument, mapXmlDocument, "WorkTab.PriorityManager", "Priorities", "workTabLi");
+            ModSupport.PrepareSaveGame.FixComponentDictionary(xmlDocument, mapXmlDocument, "CombatExtended.LoadoutManager", "assignmentLoadouts", "ceLoadoutManager");
+            
+            ModSupport.PrepareSaveGame.FixBetterPawnControl(xmlDocument, mapXmlDocument, "AssignLinks", "colonist");
+            ModSupport.PrepareSaveGame.FixBetterPawnControl(xmlDocument, mapXmlDocument, "AnimalLinks", "animal");
+            ModSupport.PrepareSaveGame.FixBetterPawnControl(xmlDocument, mapXmlDocument, "RestrictLinks", "colonist");
+            ModSupport.PrepareSaveGame.FixBetterPawnControl(xmlDocument, mapXmlDocument, "WorkLinks", "colonist");
+
             xmlDocument.Save(FilePathForTmpSave());
         }
 
@@ -162,6 +172,14 @@ namespace FactionManager
                 string path = FilePathForSavedMap(fileName);
                 SafeSaver.Save(path, "mapsave", delegate
                 {
+                    ModSupport.Savemap.StoreComponentDictionary("WorkTab.FavouriteManager", "workTabFavLi");
+                    ModSupport.Savemap.StoreComponentDictionary("WorkTab.PriorityManager", "workTabLi");
+                    ModSupport.Savemap.StoreComponentDictionary("CombatExtended.LoadoutManager", "ceLoadoutManager");
+                    
+                    WorldObject wo = Current.Game.World.worldObjects.AllWorldObjects.Find(x => x.GetType().ToString().Contains("BetterPawnControl"));
+                    if (wo != null)
+                        Scribe_Deep.Look(ref wo, "BetterPawnControl");
+
                     Map target = map;
                     Scribe_Deep.Look(ref target, "li");
                 });

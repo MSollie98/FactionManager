@@ -3,7 +3,19 @@
 	<name>Faction Manager</name>
 	<author>TGPArcher</author>
 	<url>https://ludeon.com/forums/index.php?topic=46080.msg438191#msg438191</url>
-	<targetVersion>1.0.0</targetVersion>
+	<supportedVersions>
+		<li>1.1</li>
+		<li>1.2</li>
+	</supportedVersions>
+	<packageId>PirateBY.FactionManager.byTGPArcher</packageId>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+	</modDependencies>
 	<description>As humans we have a limit to how many things we can keep track of, and this game forces you to keep track of a lot more than that, especially if you want to expand your faction having multiple colonies.
 With the Faction Manager Mod you can have more than five colonies and conquer the whole world map, or at last expand to a big and respected faction.
 The beautiful part is that you won’t have to play all your colonies at the same time as the game is designed.

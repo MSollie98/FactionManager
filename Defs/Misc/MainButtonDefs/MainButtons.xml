@@ -10,7 +10,7 @@
     <validWithoutMap>true</validWithoutMap>
   </MainButtonDef>
   
-  <MainButtonDef>
+  <!--<MainButtonDef>
     <defName>Factions</defName>
     <label>factions</label>
     <description>Review the factions known to the colony and their relationships.</description>
@@ -18,6 +18,6 @@
     <order>100</order>
     <defaultHotKey>F8</defaultHotKey>
     <validWithoutMap>true</validWithoutMap>
-  </MainButtonDef>
+  </MainButtonDef>-->
   
 </Defs>
