@@ -44,8 +44,6 @@ namespace FactionManager
 
         public override void DoWindowContents(Rect inRect)
         {
-            base.DoWindowContents(inRect);
-
             Rect generalInfoRect = new Rect(0f, 0f, inRect.width, RowHeight);
             // General Info group
             GUI.BeginGroup(generalInfoRect);
