@@ -8,6 +8,8 @@
     <tabWindowClass>FactionManager.MainTabWindow_Colonies</tabWindowClass>
     <order>90</order>
     <validWithoutMap>true</validWithoutMap>
+	<minimized>True</minimized>
+	<iconPath>World/WorldObjects/Expanding/Town</iconPath>
   </MainButtonDef>
   
   <!--<MainButtonDef>
