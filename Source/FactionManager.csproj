@@ -37,6 +37,7 @@
     <Compile Include="ModSupport.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MapDeiniter_Patch.cs" />
+    <Compile Include="OutpostsManagerTabDef.cs" />
     <Compile Include="PersistenceUtility.cs" />
     <Compile Include="ManagerTabDef.cs" />
     <Compile Include="ManagerTabDefOf.cs" />
@@ -50,7 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Krafs.Rimworld.Ref">
-      <Version>1.4.3520-beta</Version>
+      <Version>1.4.3524</Version>
     </PackageReference>
     <PackageReference Include="Lib.Harmony">
       <Version>2.2.2</Version>
