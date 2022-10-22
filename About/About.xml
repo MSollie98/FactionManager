@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Faction Manager</name>
+	<name>Faction Manager 1.4 Update</name>
 	<author>TGPArcher</author>
 	<url>https://ludeon.com/forums/index.php?topic=46080.msg438191#msg438191</url>
 	<supportedVersions>
 		<li>1.4</li>
 	</supportedVersions>
-	<packageId>PirateBY.FactionManager.byTGPArcher</packageId>
+	<packageId>PirateBY.FactionManager.byTGPArcher.Updated</packageId>
 	<modDependencies>
 		<li>
 			<packageId>brrainz.harmony</packageId>
