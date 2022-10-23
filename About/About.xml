@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Faction Manager 1.4 Update</name>
-	<author>TGPArcher</author>
+	<name>Faction Manager v1.4</name>
+	<author>TGPArcher + maintainers</author>
 	<url>https://ludeon.com/forums/index.php?topic=46080.msg438191#msg438191</url>
 	<supportedVersions>
 		<li>1.4</li>
@@ -21,7 +21,7 @@ The beautiful part is that you won’t have to play all your colonies at the sam
 When there are more colonies than you can handle you can unload one you don’t want to focus right now and it will be saved to a file, when you’ll want to play with that colony again just load it again and all will be there as you left it.
 
 Mod order:
- Order does not matter
+ Load after SetupCamp by Syrchalis if in use.
 	
 License:
  Do what you want, but give the author credit.</description>
