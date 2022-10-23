@@ -25,4 +25,8 @@ Mod order:
 	
 License:
  Do what you want, but give the author credit.</description>
+	<loadAfter>
+		<li>syrchalis.setupcamp</li>
+	</loadAfter>
+
 </ModMetaData>

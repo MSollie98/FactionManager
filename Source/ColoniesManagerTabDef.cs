@@ -94,5 +94,7 @@ namespace FactionManager
             Text.Anchor = TextAnchor.UpperLeft;
             return rowY;
         }
+
+        public override bool doLoad() => true;
     }
 }

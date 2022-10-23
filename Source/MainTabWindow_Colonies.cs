@@ -67,10 +67,12 @@ namespace FactionManager
             foreach (ManagerTabDef allDef in DefDatabase<ManagerTabDef>.AllDefs)
             {
                 ManagerTabDef localTabDef = allDef;
-                list.Add(new TabRecord(localTabDef.LabelCap, delegate
-                {
-                    CurTab = localTabDef;
-                }, localTabDef == CurTab));
+                if(localTabDef.doLoad()) { 
+                    list.Add(new TabRecord(localTabDef.LabelCap, delegate
+                    {
+                        CurTab = localTabDef;
+                    }, localTabDef == CurTab));
+                }
             }
             TabDrawer.DrawTabs(menuRect, list);
 
