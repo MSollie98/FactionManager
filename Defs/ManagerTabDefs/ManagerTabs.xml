@@ -5,5 +5,9 @@
 		<defName>Colonies</defName>
 		<label>Colonies</label>
 	</FactionManager.ColoniesManagerTabDef>
+	<FactionManager.OutpostsManagerTabDef>
+		<defName>Outposts</defName>
+		<label>Camps</label>
+	</FactionManager.OutpostsManagerTabDef>
 
 </Defs>

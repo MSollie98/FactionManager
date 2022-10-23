@@ -13,5 +13,10 @@ namespace FactionManager
         public virtual void DrawManagerRect(Rect outRect, ref Vector2 scrollPosition, ref float scrollViewHeight)
         {
         }
+
+        public virtual bool doLoad()
+        {
+            return false;
+        }
     }
 }

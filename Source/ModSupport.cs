@@ -23,6 +23,12 @@ namespace FactionManager
             }
         }
 
+        public static class SetUpCampSupport
+        {
+            public static bool SetupCampActive() => ModsConfig.ActiveModsInLoadOrder.Any(m => m.PackageId.Contains("syrchalis.setupcamp"));
+
+        }
+
         public static class PrepareSaveGame
         {
             public static void FixComponentDictionary(XmlDocument xmlDocument, XmlDocument mapXmlDocument, string componentName, string nodeName, string storeName)
