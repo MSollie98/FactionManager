@@ -13,7 +13,7 @@ namespace FactionManager
 		public override void DrawManagerRect(Rect outRect, ref Vector2 scrollPosition, ref float scrollViewHeight)
 		{
 			base.DrawManagerRect(outRect, ref scrollPosition, ref scrollViewHeight);
-			List<MapParent> list = Find.World.worldObjects.MapParents.FindAll((MapParent item) => item.def == SetUpCampDefOf.CaravanCamp);
+			List<MapParent> list = Find.World.worldObjects.MapParents.FindAll((MapParent item) => (item != null && item.def == SetUpCampDefOf.CaravanCamp));
 			GUI.BeginGroup(outRect);
 			Rect rect = new Rect(0f, 0f, outRect.width, outRect.height);
             Rect rect2 = new Rect(0f, 0f, outRect.width, scrollViewHeight);

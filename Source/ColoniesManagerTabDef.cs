@@ -12,7 +12,7 @@ namespace FactionManager
         {
             base.DrawManagerRect(outRect, ref scrollPosition, ref scrollViewHeight);
 
-            List<Settlement> settlements = Find.World.worldObjects.Settlements.FindAll(settlement => settlement.Faction.IsPlayer);
+            List<Settlement> settlements = Find.World.worldObjects.Settlements.FindAll(settlement => (settlement != null && settlement.Faction != null && settlement.Faction.IsPlayer));
 
             GUI.BeginGroup(outRect);
             Rect listOutRect = new Rect(0f, 0f, outRect.width, outRect.height);

@@ -37,7 +37,7 @@ namespace FactionManager
 
         private static bool MaxColoniesReached()
         {
-            return LoadedColonies(Find.World.worldObjects.Settlements.FindAll(settlement => settlement.Faction.IsPlayer)) >= Prefs.MaxNumberOfPlayerSettlements;
+            return LoadedColonies(Find.World.worldObjects.Settlements.FindAll(settlement => (settlement != null && settlement.Faction != null && settlement.Faction.IsPlayer))) >= Prefs.MaxNumberOfPlayerSettlements;
         }
 
         private static void LoadGameFromTmpSave(string fileName)
@@ -147,7 +147,9 @@ namespace FactionManager
             if (Current.Game.CurrentMap == unloadedMap)
             {
                 var playerSettlements = Find.World.worldObjects.Settlements.FindAll(settlement =>
-                    settlement.Faction.IsPlayer
+                    settlement != null
+                    && settlement.Faction != null 
+                    && settlement.Faction.IsPlayer
                     && settlement.Map != null
                     && settlement.Map != unloadedMap);
                 
@@ -161,7 +163,7 @@ namespace FactionManager
 
         private static bool IsLastColony()
         {
-            return LoadedColonies(Find.World.worldObjects.Settlements.FindAll(settlement => settlement.Faction.IsPlayer)) == 1;
+            return LoadedColonies(Find.World.worldObjects.Settlements.FindAll(settlement => (settlement != null && settlement.Faction != null && settlement.Faction.IsPlayer))) == 1;
         }
 
         private static bool SaveMap(Map map, string fileName)
