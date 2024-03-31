@@ -124,7 +124,13 @@ namespace FactionManager
                 {
                     // Changing state to not get the banished debuff as you literally don't banish your people
                     Current.ProgramState = ProgramState.Entry;
+#if v1_3
                     Current.Game.DeinitAndRemoveMap(map);
+#elif v1_4
+                    Current.Game.DeinitAndRemoveMap_NewTemp(map, false);
+#else 
+                    Current.Game.DeinitAndRemoveMap(map, false);
+#endif
                     Current.ProgramState = ProgramState.Playing;
                     
                     Messages.Message("FM.mapUnloaded".Translate(), MessageTypeDefOf.NeutralEvent);
