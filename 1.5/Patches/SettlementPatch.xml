@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/WorldObjectDef[defName="Settlement"]/comps</xpath>
+        <nomatch Class="PatchOperationAdd">
+            <xpath>/Defs/WorldObjectDef[defName="Settlement"]</xpath>
+            <value>
+                <comps>
+                    <li>
+                        <compClass>FactionManager.UnloadedWorldObjectComp</compClass>
+                    </li>
+                </comps>
+            </value>
+        </nomatch>
+        <match Class="PatchOperationAdd">
+            <xpath>/Defs/WorldObjectDef[defName="Settlement"]/comps</xpath>
+            <value>
+                <li>
+                    <compClass>FactionManager.UnloadedWorldObjectComp</compClass>
+                </li>
+            </value>
+        </match>
+    </Operation>
+    <Operation Class="PatchOperationConditional">
+        <xpath>/Defs/WorldObjectDef[defName="CaravanCamp"]</xpath>
+        <match Class="PatchOperationConditional">
+            <xpath>/Defs/WorldObjectDef[defName="CaravanCamp"]/comps</xpath>
+            <nomatch Class="PatchOperationAdd">
+                <xpath>/Defs/WorldObjectDef[defName="CaravanCamp"]</xpath>
+                <value>
+                    <comps>
+                        <li>
+                            <compClass>FactionManager.UnloadedWorldObjectComp</compClass>
+                        </li>
+                    </comps>
+                </value>
+            </nomatch>
+            <match Class="PatchOperationAdd">
+                <xpath>/Defs/WorldObjectDef[defName="CaravanCamp"]/comps</xpath>
+                <value>
+                    <li>
+                        <compClass>FactionManager.UnloadedWorldObjectComp</compClass>
+                    </li>
+                </value>
+            </match>
+        </match>
+
+    </Operation>
+</Patch>
