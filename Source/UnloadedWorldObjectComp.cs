@@ -9,6 +9,7 @@ using Verse;
 
 namespace FactionManager
 {
+#if !v1_3
     public class UnloadedWorldObjectComp : WorldObjectComp, IThingHolder
     {
         private ThingOwner<Pawn> unloadedPawns;
@@ -40,10 +41,14 @@ namespace FactionManager
                     }
                     if (!suspended)
                     {
+#if v1_3 || v1_4
+                        p.ageTracker.AgeTick();
+#else
                         if (!p.IsMutant || p.mutant.Def.shouldTickAge)
                         {
                             p.ageTracker.AgeTick();
                         }
+#endif
                     }
                 }
             }
@@ -232,4 +237,5 @@ namespace FactionManager
             return unloadedPawns;
         }
     }
+#endif
 }
