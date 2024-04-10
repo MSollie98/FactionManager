@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '1.5|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == '1.5|AnyCPU'">
     <OutputPath>..\1.5\Assemblies\</OutputPath>
     <DefineConstants>TRACE;v1_5</DefineConstants>
     <Optimize>true</Optimize>
@@ -52,6 +52,7 @@
     <Compile Include="MainTabWindow_Colonies.cs" />
     <Compile Include="PersistenceUtilityStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnloadedWorldObjectComp.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(Configuration)|$(Platform)' == '1.3|AnyCPU'">
