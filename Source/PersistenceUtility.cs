@@ -32,8 +32,13 @@ namespace FactionManager
                 Messages.Message("CommandSettleFailReachedMaximumNumberOfBases".Translate(), MessageTypeDefOf.NeutralEvent);
             }
 
+            #if v1_5
+            utilityStatus = PersistenceUtilityStatus.PostLoading;
+            Current.Game.World.worldObjects.AllWorldObjects.FindAll(x => x.GetComponent<UnloadedWorldObjectComp>() != null).ForEach(x => x.GetComponent<UnloadedWorldObjectComp>().LoadAllColonists());
+            #endif
             utilityStatus = PersistenceUtilityStatus.Idle;
         }
+
 
         private static bool MaxColoniesReached()
         {
@@ -178,6 +183,16 @@ namespace FactionManager
             {
                 LongEventHandler.SetCurrentEventText("Saving...");
                 string path = FilePathForSavedMap(fileName);
+
+                #if v1_5
+                UnloadedWorldObjectComp comp = map.Parent.GetComponent<UnloadedWorldObjectComp>();
+                if (comp == null)
+                {
+                    Log.Error("UnloadedWorldObjectComp not found");
+                    return false;
+                }
+                comp.UnloadAllColonists();
+                #endif
                 SafeSaver.Save(path, "mapsave", delegate
                 {
                     ModSupport.Savemap.StoreComponentDictionary("WorkTab.FavouriteManager", "workTabFavLi");
