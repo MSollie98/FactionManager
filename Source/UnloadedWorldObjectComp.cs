@@ -16,7 +16,7 @@ namespace FactionManager
 
         public UnloadedWorldObjectComp()
         {
-            this.unloadedPawns = new ThingOwner<Pawn>(this, oneStackOnly: false, LookMode.Reference);
+            this.unloadedPawns = new ThingOwner<Pawn>(this, oneStackOnly: false, LookMode.Deep);
             Log.Message("UnloadedWorldObjectComp " + this.parent + " Init");
 
         }
