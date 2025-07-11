@@ -32,7 +32,7 @@ namespace FactionManager
                 Messages.Message("CommandSettleFailReachedMaximumNumberOfBases".Translate(), MessageTypeDefOf.NeutralEvent);
             }
 
-            #if v1_5
+            #if v1_5 || v1_6
             utilityStatus = PersistenceUtilityStatus.PostLoading;
             Current.Game.World.worldObjects.AllWorldObjects.FindAll(x => x.GetComponent<UnloadedWorldObjectComp>() != null).ForEach(x => x.GetComponent<UnloadedWorldObjectComp>().LoadAllColonists());
             #endif
@@ -184,7 +184,7 @@ namespace FactionManager
                 LongEventHandler.SetCurrentEventText("Saving...");
                 string path = FilePathForSavedMap(fileName);
 
-                #if v1_5
+                #if v1_5 || v1_6
                 UnloadedWorldObjectComp comp = map.Parent.GetComponent<UnloadedWorldObjectComp>();
                 if (comp == null)
                 {
