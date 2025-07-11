@@ -13,10 +13,15 @@ namespace FactionManager
     public class UnloadedWorldObjectComp : WorldObjectComp, IThingHolder
     {
         private ThingOwner<Pawn> unloadedPawns;
-
+#if v1_6
+        private ThingOwner<Building> unloadedBuildings;
+#endif
         public UnloadedWorldObjectComp()
         {
             this.unloadedPawns = new ThingOwner<Pawn>(this, oneStackOnly: false, LookMode.Deep);
+#if v1_6
+            this.unloadedBuildings = new ThingOwner<Building>(this, oneStackOnly: false, LookMode.Deep);
+#endif
             Log.Message("UnloadedWorldObjectComp " + this.parent + " Init");
 
         }
@@ -84,6 +89,11 @@ namespace FactionManager
                         {
                             p.ageTracker.AgeTick();
                         }
+#else
+                        if (!p.IsMutant || p.mutant.Def.disableAging)
+                        {
+                            p.ageTracker.AgeTickInterval(delta);
+                        }
 #endif
                     }
                 }
@@ -98,6 +108,22 @@ namespace FactionManager
             {
                 throw new Exception(this + " :: LoadAllColonists called at the wrong time: " + PersistenceUtility.utilityStatus);
             }
+#if v1_6
+            if (this.unloadedBuildings != null)
+            {
+                if (unloadedBuildings.Count > 0)
+                {
+                    if (this.ParentHasMap)
+                    {
+                        Log.Message("Respawning caskets");
+                        Map map = (this.parent as MapParent).Map;
+                        UnloadedWorldObjectComp.DropBuildings(map, unloadedBuildings);
+                        unloadedBuildings.Clear();
+                    }
+
+                }
+            }
+#endif
             if (this.unloadedPawns != null)
             {
                 if (unloadedPawns.Count > 0)
@@ -110,6 +136,28 @@ namespace FactionManager
                         unloadedPawns.Clear();
                     }
                    
+                }
+            }
+            
+        }
+
+        private static void DropBuildings(Map map, IEnumerable<Building> things)
+        {
+            List<List<Building>> thingsGroups = new List<List<Building>>();
+            thingsGroups.Clear();
+            foreach (Building thing in things)
+            {
+                List<Building> list = new List<Building>();
+                list.Add(thing);
+                thingsGroups.Add(list);
+            }
+            foreach (List<Building> thingsGroup in thingsGroups)
+            {
+                foreach (Building building in thingsGroup)
+                {
+                    Log.Message("Respawning Casket " + building.ToString());
+                    GenSpawn.SpawnBuildingAsPossible(building, map, true);
+                    Log.Message("Respawned Casket !");
                 }
             }
         }
@@ -198,6 +246,12 @@ namespace FactionManager
                 Log.Warning("UnloadAllColonists " + this.parent + " unloadedPawns == null");
                 this.unloadedPawns = new ThingOwner<Pawn>(this, oneStackOnly: false, LookMode.Deep);
             }
+#if v1_6
+            if(this.unloadedBuildings == null)
+            {
+                this.unloadedBuildings = new ThingOwner<Building>(this, oneStackOnly: false, LookMode.Deep);
+            }      
+#endif
             if (this.parent is MapParent)
             {
                 if(!this.ParentHasMap)
@@ -249,7 +303,29 @@ namespace FactionManager
                             p.carryTracker.innerContainer.Remove(pawn);
                         }
                     }
+#if v1_6
+                    if(p.InContainerEnclosed)
+                    {
+                        if(p.ParentHolder is Building_Casket || p.ParentHolder is Building_HoldingPlatform)
+                        {
+                            Building casket = (Building)p.ParentHolder;
+                            casket.DeSpawnOrDeselect();
+
+                            if(unloadedBuildings.TryAddOrTransfer(casket))
+                            {
+                                Log.Message(string.Concat("Added building ", casket, " for pawn ",p,"  to unloadedWorldObj: " + this));
+                                continue;
+                            }
+                            else
+                            {
+                                Log.Error(string.Concat("Couldnt add building ", casket, " for pawn ", p, "  to unloadedWorldObj: " + this));
+
+                            }
+                        }
+                    }
+#endif
                     p.DeSpawnOrDeselect();
+                    
                     if (unloadedPawns.TryAddOrTransfer(p))
                     {
                        Log.Message(string.Concat("Added pawn ", p, " to unloadedWorldObj: " + this));
@@ -275,14 +351,29 @@ namespace FactionManager
                 {
                     unloadedPawns.RemoveAll((Pawn x) => x.Destroyed);
                 }
+#if v1_6
+                if(this.unloadedBuildings != null)
+                {
+                    unloadedBuildings.RemoveAll((Building x) => x.Destroyed);
+                }
+#endif
 
             }
 
             Scribe_Deep.Look(ref unloadedPawns, "unloadedPawns", this);
-            if(this.unloadedPawns != null)
+#if v1_6
+            Scribe_Deep.Look(ref unloadedBuildings, "unloadedBuildings", this);
+            if (this.unloadedBuildings != null)
+            {
+                Log.Message(this + " :: Have " + this.unloadedBuildings.Count + " unloaded buildings. ");
+            }
+#endif
+            if (this.unloadedPawns != null)
             {
                 Log.Message(this + " :: Have " + this.unloadedPawns.Count + " unloaded pawns. ");
             }
+
+
 
         }
 
