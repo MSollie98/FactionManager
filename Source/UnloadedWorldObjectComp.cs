@@ -159,10 +159,28 @@ namespace FactionManager
                 foreach (Thing item2 in thingsGroup)
                 {
                     activeDropPodInfo.innerContainer.TryAddOrTransfer(item2);
+                    
+                    bool canSpawnAt = GenSpawn.CanSpawnAt(item2.def, item2.Position, map, item2.Rotation);
+
+                    if(canSpawnAt)
+                    {
+                        Log.Message("Thing [" + item2.ToString() + "] can spawn at " + item2.Position.ToString());
+                        GenSpawn.Spawn(item2, item2.Position, map, item2.Rotation, WipeMode.VanishOrMoveAside);
+                    } else
+                    {
+                        
+                        Log.Warning("Thing [" + item2.ToString() + "] cannot spawn at " + item2.Position.ToString());
+                        activeDropPodInfo.innerContainer.TryAddOrTransfer(item2);
+                        needToPod = true;
+                    }
                 }
                 activeDropPodInfo.openDelay = openDelay;
                 activeDropPodInfo.leaveSlag = leaveSlag;
+                
+                if(needToPod)
+                {
                 DropPodUtility.MakeDropPodAt(result, map, activeDropPodInfo, faction);
+                }
             }
             thingsGroups.Clear();
         }
