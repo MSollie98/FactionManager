@@ -21,10 +21,46 @@ namespace FactionManager
 
         }
 
+#if v1_3 || v1_4 || v1_5
+//CompTickInterval is not applicable. Also, interval is very smart for prevention of lag ngl.
+#else
+        public override void CompTickInterval(int delta)
+        {
+            base.CompTickInterval(delta);
+
+            if (this.unloadedPawns != null && this.unloadedPawns.Count > 0)
+            {
+                foreach (Pawn p in this.unloadedPawns)
+                {
+                    if (p == null)
+                    {
+                        Log.Warning("Tried to tick a null pawn in " + this);
+                        continue;
+                    }
+                    bool suspended;
+                    using (new ProfilerBlock("Suspended"))
+                    {
+                        suspended = p.Suspended;
+                    }
+                    if (!suspended)
+                    {
+
+                        if (!p.IsMutant || p.mutant.Def.disableAging)
+                        {
+                            p.ageTracker.AgeTickInterval(delta);
+                        }
+                    }
+                }
+            }
+
+        }
+#endif
+
+
         public override void CompTick()
         {
             base.CompTick();
-            
+#if v1_3 || v1_4 || v1_5
             if(this.unloadedPawns != null && this.unloadedPawns.Count > 0)
             {
                 foreach(Pawn p in this.unloadedPawns)
@@ -43,7 +79,7 @@ namespace FactionManager
                     {
 #if v1_3 || v1_4
                         p.ageTracker.AgeTick();
-#else
+#elif (v1_5)
                         if (!p.IsMutant || p.mutant.Def.shouldTickAge)
                         {
                             p.ageTracker.AgeTick();
@@ -53,7 +89,7 @@ namespace FactionManager
                 }
             }
 
-
+#endif
         }
 
         public void LoadAllColonists()
@@ -114,7 +150,12 @@ namespace FactionManager
                     }
                     continue;
                 }
+#if !v1_6
                 ActiveDropPodInfo activeDropPodInfo = new ActiveDropPodInfo();
+#elif v1_6
+                ActiveTransporterInfo activeDropPodInfo = new ActiveTransporterInfo();
+#endif
+                bool needToPod = false;
                 foreach (Thing item2 in thingsGroup)
                 {
                     activeDropPodInfo.innerContainer.TryAddOrTransfer(item2);
