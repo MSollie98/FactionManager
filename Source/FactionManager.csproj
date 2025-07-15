@@ -54,6 +54,7 @@
     <Compile Include="ModSupport.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MapDeiniter_Patch.cs" />
+    <Compile Include="OrbitManagerTabDef.cs" />
     <Compile Include="OutpostsManagerTabDef.cs" />
     <Compile Include="PersistenceUtility.cs" />
     <Compile Include="ManagerTabDef.cs" />
@@ -138,9 +139,9 @@
       </ItemGroup>
       <ItemGroup>
         <Reference Include="SetUpCamp">
-			    <HintPath>..\..\..\..\dependencies\3234938357\1.6\Assemblies\SetUpCamp.dll</HintPath>
-			    <Private>False</Private>
-		    </Reference>
+          <HintPath>..\..\..\..\dependencies\3234938357\1.6\Assemblies\SetUpCamp.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
         <Reference Include="System" />
         <Reference Include="System.Xml" />
       </ItemGroup>
