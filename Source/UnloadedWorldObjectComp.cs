@@ -22,7 +22,6 @@ namespace FactionManager
 #if v1_6
             this.unloadedBuildings = new ThingOwner<Building>(this, oneStackOnly: false, LookMode.Deep);
 #endif
-            Log.Message("UnloadedWorldObjectComp " + this.parent + " Init");
 
         }
 
@@ -365,11 +364,13 @@ namespace FactionManager
             Scribe_Deep.Look(ref unloadedBuildings, "unloadedBuildings", this);
             if (this.unloadedBuildings != null)
             {
+                if(this.unloadedBuildings.Count > 0)
                 Log.Message(this + " :: Have " + this.unloadedBuildings.Count + " unloaded buildings. ");
             }
 #endif
             if (this.unloadedPawns != null)
             {
+                if(this.unloadedPawns.Count > 0)
                 Log.Message(this + " :: Have " + this.unloadedPawns.Count + " unloaded pawns. ");
             }
 
