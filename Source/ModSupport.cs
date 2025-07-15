@@ -29,6 +29,11 @@ namespace FactionManager
 
         }
 
+        public static class OrbitSupport
+        {
+            public static bool OrbitActive() => ModsConfig.ActiveModsInLoadOrder.Any(m => m.PackageId.Contains("gdn.uwu.rw.factionmanagerorbit"));
+        }
+
         public static class PrepareSaveGame
         {
             public static void FixComponentDictionary(XmlDocument xmlDocument, XmlDocument mapXmlDocument, string componentName, string nodeName, string storeName)

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using FactionManager.ModSupport;
 using RimWorld.Planet;
-using Syrchalis_SetUpCamp;
 using UnityEngine;
 using Verse;
 
@@ -94,7 +93,7 @@ namespace FactionManager
 		}
 		public override bool doLoad()
 		{
-			return SetUpCampSupport.SetupCampActive();
+			return ModSupport.OrbitSupport.OrbitActive();
 		}
 	}
 }
